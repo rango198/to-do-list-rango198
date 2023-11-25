@@ -11,7 +11,7 @@ async function onLoad() {
 
     addMarkup(tableEl, markup);
   } catch (err) {
-    console.log(err.massage);
+    console.log(err.message);
   }
 }
 onLoad();
@@ -19,7 +19,9 @@ onLoad();
 tableEl.addEventListener("click", onClick);
 
 function onClick(event) {
-  const userId = event.target.closest('tr').dataset.userid;
-  
+  const userId = event.target.closest("tr").dataset.userid;
+
   location.href = `user.html?userid=${userId}`;
+
+  console.log(userId);
 }

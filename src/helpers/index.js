@@ -1,3 +1,3 @@
-export function addMarkup (el, markup) {
-el.innerHTML = markup;
+export function addMarkup(el, markup) {
+  el.innerHTML = markup;
 }
