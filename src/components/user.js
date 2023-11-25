@@ -27,3 +27,13 @@ async function onLoad() {
 
 onLoad();
 
+
+userAlbumEl.addEventListener("click", onClick);
+
+function onClick(event) {
+  const id = event.target.closest(".js-list-user-album").dataset.id;
+
+  location.href = `album.html?albumid=${id}`;
+
+console.log(id);
+}
