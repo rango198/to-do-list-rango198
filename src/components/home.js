@@ -15,3 +15,11 @@ async function onLoad() {
   }
 }
 onLoad();
+
+tableEl.addEventListener("click", onClick);
+
+function onClick(event) {
+  const userId = event.target.closest('tr').dataset.userid;
+  
+  location.href = `user.html?userid=${userId}`;
+}
