@@ -24,3 +24,14 @@ async function onload() {
 }
 
 onload();
+
+
+ulAlbums.addEventListener("click", onClick);
+
+function onClick(event) {
+
+  const albumId = event.target.closest(".js-list-user-album").dataset.id;
+  console.log(albumId);
+
+  location.href = `album.html?albumid=${albumId}`;
+}
