@@ -1,39 +1,26 @@
+import { markupByUserId, createListAlbum } from "../markup";
+import { fetchInfo } from "../api";
+import { addMarkup } from "../helpers";
+import { tablUsersEl, ulAlbums } from "../refs";
+
 const param = location.search;
+
 const searchParams = new URLSearchParams(location.search);
-const userId = searchParams.get('userid')
+const userId = searchParams.get("userid");
 console.log(userId);
 
-import { fetchInfo } from "../api";
-import { markupByUserId, createListAlbum } from "../markup";
-import { userTableEl, userAlbumEl } from "../refs";
-import { addMarkup } from "../helpers";
-
-async function onLoad() {
+async function onload() {
   try {
-    const response = await fetchInfo(`users/${userId}`);
+    const respones = await fetchInfo(`users/${userId}`);
+    const markup = markupByUserId(respones);
+    addMarkup(tablUsersEl, markup);
 
-    const markup = markupByUserId(response);
-
-    addMarkup(userTableEl, markup);
-
-    const albums = await fetchInfo(`albums?userId=${userId}`);
-    const albumMarkup = createListAlbum(albums);
-
-    addMarkup(userAlbumEl, albumMarkup);
+    const paramsAlbums = await fetchInfo(`albums?userId=${userId}`);
+    const markupAlbums = createListAlbum(paramsAlbums);
+    addMarkup(ulAlbums, markupAlbums);
   } catch (err) {
-    console.log(err.message);
+    console.log(err.massage);
   }
 }
 
-onLoad();
-
-
-userAlbumEl.addEventListener("click", onClick);
-
-function onClick(event) {
-  const id = event.target.closest(".js-list-user-album").dataset.id;
-
-  location.href = `album.html?albumid=${id}`;
-
-console.log(id);
-}
+onload();

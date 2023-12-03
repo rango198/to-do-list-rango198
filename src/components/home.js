@@ -1,27 +1,24 @@
 import { fetchInfo } from "../api";
 import { markupUsers } from "../markup";
-import { tableEl } from "../refs";
 import { addMarkup } from "../helpers";
+import { tablEl } from "../refs";
 
-async function onLoad() {
+async function onload() {
   try {
-    const response = await fetchInfo("users");
-
-    const markup = markupUsers(response);
-
-    addMarkup(tableEl, markup);
+    const respones = await fetchInfo("users")
+    const markup = markupUsers(respones);
+    addMarkup(tablEl, markup);
   } catch (err) {
-    console.log(err.message);
+    console.log(err.massage)
   }
 }
-onLoad();
 
-tableEl.addEventListener("click", onClick);
+
+tablEl.addEventListener("click", onClick);
 
 function onClick(event) {
   const userId = event.target.closest("tr").dataset.userid;
-
-  location.href = `user.html?userid=${userId}`;
-
-  console.log(userId);
+  location.href = `./user.html?userid=${userId}`
 }
+
+onload();
